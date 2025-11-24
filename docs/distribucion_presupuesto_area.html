@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Distribución del Presupuesto por Área (2000-2011)</title>
+
+    <style type="text/css">
+        #container {
+            height: 400px; 
+        }
+
+        .highcharts-figure, .highcharts-data-table table {
+            min-width: 310px; 
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #EBEBEB;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+        .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+        .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+    </style>
+</head>
+<body>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+</figure>
+
+<script type="text/javascript">
+Highcharts.chart('container', {
+    credits: {
+        enabled: false
+    },
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Distribución del Presupuesto por Área (2000-2011)'
+    },
+    subtitle: {
+        text: 'Visualización 3D Donut'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Monto',
+        data: [
+            ['Agropecuaria', 32596055.0],
+            ['Alimentos', 1411774.0],
+            ['Educación', 3287428.0],
+            ['Energía', 2509693.0],
+            ['Forestal', 7941158.0],
+            ['Infraestructura', 2949963.0],
+            ['Manufactura', 4155013.0],
+            ['Minería', 5474021.0],
+            ['Otros', 21974664.0],
+            ['Pesca Y Acuicultura', 15186919.0],
+            ['Salud', 15897385.0],
+            ['Tic', 26698516.0]
+        ]
+    }]
+});
+</script>
+</body>
+</html>

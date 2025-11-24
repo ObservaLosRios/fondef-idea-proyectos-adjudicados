@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Evolución de Montos por Área (2000-2011)</title>
+
+    <style type="text/css">
+        #container {
+            height: 400px; 
+        }
+
+        .highcharts-figure, .highcharts-data-table table {
+            min-width: 310px; 
+            max-width: 800px;
+            margin: 1em auto;
+        }
+
+        .highcharts-data-table table {
+            font-family: Verdana, sans-serif;
+            border-collapse: collapse;
+            border: 1px solid #EBEBEB;
+            margin: 10px auto;
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        .highcharts-data-table caption {
+            padding: 1em 0;
+            font-size: 1.2em;
+            color: #555;
+        }
+        .highcharts-data-table th {
+            font-weight: 600;
+            padding: 0.5em;
+        }
+        .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+            padding: 0.5em;
+        }
+        .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+            background: #f8f8f8;
+        }
+        .highcharts-data-table tr:hover {
+            background: #f1f7ff;
+        }
+    </style>
+</head>
+<body>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+</figure>
+
+<script type="text/javascript">
+Highcharts.chart('container', {
+    credits: {
+        enabled: false
+    },
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Evolución de Montos por Área (2000-2011)',
+        align: 'left'
+    },
+    xAxis: {
+        categories: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010, 2011]
+    },
+    yAxis: {
+        allowDecimals: false,
+        min: 0,
+        title: {
+            text: 'Monto (Miles $)'
+        }
+    },
+    tooltip: {
+        format: '<b>{key}</b><br/>{series.name}: {y}<br/>' +
+            'Total: {point.stackTotal}'
+    },
+    plotOptions: {
+        column: {
+            stacking: 'normal'
+        }
+    },
+    series: [
+        {"name": "Agropecuaria", "data": [1990000.0, 2211000.0, 2945000.0, 3843000.0, 3529000.0, 3386050.0, 3065218.0, 2401000.0, 2776224.0, 5120542.0, 1329021.0]},
+        {"name": "Alimentos", "data": [276000.0, 100000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 201353.0, 834421.0, 0.0]},
+        {"name": "Educación", "data": [636000.0, 471000.0, 1135000.0, 105000.0, 0.0, 325400.0, 262021.0, 0.0, 0.0, 353007.0, 0.0]},
+        {"name": "Energía", "data": [0.0, 309000.0, 0.0, 180000.0, 199000.0, 451900.0, 0.0, 209000.0, 265335.0, 646157.0, 249301.0]},
+        {"name": "Forestal", "data": [980000.0, 918000.0, 939000.0, 602000.0, 1361000.0, 0.0, 484779.0, 655000.0, 356400.0, 1349437.0, 295542.0]},
+        {"name": "Infraestructura", "data": [571000.0, 190000.0, 268000.0, 155000.0, 117000.0, 0.0, 0.0, 528000.0, 0.0, 1120963.0, 0.0]},
+        {"name": "Manufactura", "data": [0.0, 519000.0, 0.0, 319000.0, 146000.0, 547900.0, 449578.0, 614000.0, 356400.0, 981155.0, 221980.0]},
+        {"name": "Minería", "data": [760000.0, 888000.0, 970000.0, 540000.0, 546000.0, 343200.0, 311321.0, 209000.0, 0.0, 620422.0, 286078.0]},
+        {"name": "Otros", "data": [1224000.0, 693000.0, 1636000.0, 1533000.0, 1258000.0, 1283180.0, 1505908.0, 3581000.0, 4148658.0, 4033763.0, 1078155.0]},
+        {"name": "Pesca Y Acuicultura", "data": [1576000.0, 1976000.0, 1917000.0, 1542000.0, 976000.0, 325600.0, 1648100.0, 1169000.0, 2032087.0, 1739542.0, 285590.0]},
+        {"name": "Salud", "data": [555000.0, 1025000.0, 1011000.0, 856000.0, 2085000.0, 1309100.0, 1068029.0, 1665000.0, 1533873.0, 2862929.0, 1926454.0]},
+        {"name": "Tic", "data": [1393000.0, 1856000.0, 1433000.0, 2188000.0, 2137000.0, 1900700.0, 1593141.0, 1369000.0, 3112619.0, 7638251.0, 2077805.0]}
+    ]
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Proyectos Fondef IDeA - Universidad Austral de Chile</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Highcharts Libraries -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-3d.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="main-header">
+        <div class="logos-container">
+            <img src="thumbnail_Logo observa.png" alt="Universidad Austral de Chile - Centro de Estudios Regionales" class="header-logo-left">
+            <img src="thumbnail_images.png" alt="Logo Región" class="header-logo">
+        </div>
+        <div class="header-content">
+            <h1 class="main-title" id="main-title">Análisis de Proyectos Fondef IDeA</h1>
+            <p class="subtitle" id="subtitle">Universidad Austral de Chile - Centro de Estudios Regionales</p>
+        </div>
+    </header>
+    
+    <!-- Navegación -->
+    <nav class="nav-container">
+        <div class="nav-links" id="nav-links">
+            <span class="nav-link active" onclick="showSection('proyectos', event)">Evolución Proyectos</span>
+            <span class="nav-link" onclick="showSection('presupuesto', event)">Distribución Presupuesto</span>
+            <span class="nav-link" onclick="showSection('montos', event)">Evolución Montos</span>
+            <span class="nav-link" onclick="showSection('top5', event)">Top 5 Áreas</span>
+        </div>
+    </nav>
+    
+    <!-- Container Principal -->
+    <div class="container">
+        
+        <!-- Sección 1: Evolución Proyectos -->
+        <section id="proyectos" class="section active">
+            <h2 class="section-title">Evolución de la Cantidad de Proyectos por Año</h2>
+            <div class="chart-section">
+                <div id="container-proyectos" class="chart-container" style="height: 500px;"></div>
+            </div>
+        </section>
+
+        <!-- Sección 2: Distribución Presupuesto -->
+        <section id="presupuesto" class="section">
+            <h2 class="section-title">Distribución del Presupuesto por Área (2000-2011)</h2>
+            <div class="chart-section">
+                <div id="container-presupuesto" class="chart-container" style="height: 500px;"></div>
+            </div>
+        </section>
+
+        <!-- Sección 3: Evolución Montos -->
+        <section id="montos" class="section">
+            <h2 class="section-title">Evolución de Montos por Área (2000-2011)</h2>
+            <div class="chart-section">
+                <div id="container-montos" class="chart-container" style="height: 500px;"></div>
+            </div>
+        </section>
+
+        <!-- Sección 4: Top 5 Áreas -->
+        <section id="top5" class="section">
+            <h2 class="section-title">Evolución de las 5 Áreas Principales</h2>
+            <div class="chart-section">
+                <div id="container-top5" class="chart-container" style="height: 600px;"></div>
+            </div>
+        </section>
+        
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text" id="footer-text">
+            Análisis desarrollado por<br>
+            Universidad Austral de Chile - Centro de Estudios Regionales
+        </p>
+        <img src="thumbnail_logo cer.png" alt="Universidad Austral de Chile - Centro de Estudios Regionales" class="footer-logo">
+    </footer>
+
+    <script>
+        // Función para cambiar pestañas
+        function showSection(sectionId, event) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            // Desactivar todos los links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Mostrar sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Activar link correspondiente
+            if(event) {
+                event.target.classList.add('active');
+            }
+            
+            // Redibujar gráficos para ajustar tamaño
+            Highcharts.charts.forEach(chart => {
+                if (chart) chart.reflow();
+            });
+        }
+
+        // Gráfico 1: Evolución Proyectos
+        Highcharts.chart('container-proyectos', {
+            credits: { enabled: false },
+            title: { text: 'Evolución de la Cantidad de Proyectos por Año' },
+            accessibility: {
+                point: { valueDescriptionFormat: '{xDescription}{separator}{value} proyectos' }
+            },
+            xAxis: {
+                title: { text: 'Año' },
+                categories: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]
+            },
+            yAxis: {
+                type: 'logarithmic',
+                title: { text: 'N° de Proyectos' }
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br />',
+                pointFormat: '{point.y} proyectos'
+            },
+            series: [{
+                name: 'Proyectos',
+                data: [50, 60, 62, 60, 61, 44, 38, 45, 49, 95, 27, 55, 93, 71, 98, 116, 75],
+                color: 'var(--highcharts-color-1, #E63946)'
+            }]
+        });
+
+        // Gráfico 2: Distribución Presupuesto
+        Highcharts.chart('container-presupuesto', {
+            credits: { enabled: false },
+            chart: {
+                type: 'pie',
+                options3d: { enabled: true, alpha: 45 }
+            },
+            title: { text: 'Distribución del Presupuesto por Área (2000-2011)' },
+            subtitle: { text: 'Visualización 3D Donut' },
+            plotOptions: {
+                pie: { innerSize: 100, depth: 45 }
+            },
+            series: [{
+                name: 'Monto',
+                data: [
+                    ['Agropecuaria', 32596055.0],
+                    ['Alimentos', 1411774.0],
+                    ['Educación', 3287428.0],
+                    ['Energía', 2509693.0],
+                    ['Forestal', 7941158.0],
+                    ['Infraestructura', 2949963.0],
+                    ['Manufactura', 4155013.0],
+                    ['Minería', 5474021.0],
+                    ['Otros', 21974664.0],
+                    ['Pesca Y Acuicultura', 15186919.0],
+                    ['Salud', 15897385.0],
+                    ['Tic', 26698516.0]
+                ]
+            }]
+        });
+
+        // Gráfico 3: Evolución Montos
+        Highcharts.chart('container-montos', {
+            credits: { enabled: false },
+            chart: { type: 'column' },
+            title: { text: 'Evolución de Montos por Área (2000-2011)', align: 'left' },
+            xAxis: {
+                categories: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010, 2011]
+            },
+            yAxis: {
+                allowDecimals: false,
+                min: 0,
+                title: { text: 'Monto (Miles $)' }
+            },
+            tooltip: {
+                format: '<b>{key}</b><br/>{series.name}: {y}<br/>Total: {point.stackTotal}'
+            },
+            plotOptions: {
+                column: { stacking: 'normal' }
+            },
+            series: [
+                {"name": "Agropecuaria", "data": [1990000.0, 2211000.0, 2945000.0, 3843000.0, 3529000.0, 3386050.0, 3065218.0, 2401000.0, 2776224.0, 5120542.0, 1329021.0]},
+                {"name": "Alimentos", "data": [276000.0, 100000.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 201353.0, 834421.0, 0.0]},
+                {"name": "Educación", "data": [636000.0, 471000.0, 1135000.0, 105000.0, 0.0, 325400.0, 262021.0, 0.0, 0.0, 353007.0, 0.0]},
+                {"name": "Energía", "data": [0.0, 309000.0, 0.0, 180000.0, 199000.0, 451900.0, 0.0, 209000.0, 265335.0, 646157.0, 249301.0]},
+                {"name": "Forestal", "data": [980000.0, 918000.0, 939000.0, 602000.0, 1361000.0, 0.0, 484779.0, 655000.0, 356400.0, 1349437.0, 295542.0]},
+                {"name": "Infraestructura", "data": [571000.0, 190000.0, 268000.0, 155000.0, 117000.0, 0.0, 0.0, 528000.0, 0.0, 1120963.0, 0.0]},
+                {"name": "Manufactura", "data": [0.0, 519000.0, 0.0, 319000.0, 146000.0, 547900.0, 449578.0, 614000.0, 356400.0, 981155.0, 221980.0]},
+                {"name": "Minería", "data": [760000.0, 888000.0, 970000.0, 540000.0, 546000.0, 343200.0, 311321.0, 209000.0, 0.0, 620422.0, 286078.0]},
+                {"name": "Otros", "data": [1224000.0, 693000.0, 1636000.0, 1533000.0, 1258000.0, 1283180.0, 1505908.0, 3581000.0, 4148658.0, 4033763.0, 1078155.0]},
+                {"name": "Pesca Y Acuicultura", "data": [1576000.0, 1976000.0, 1917000.0, 1542000.0, 976000.0, 325600.0, 1648100.0, 1169000.0, 2032087.0, 1739542.0, 285590.0]},
+                {"name": "Salud", "data": [555000.0, 1025000.0, 1011000.0, 856000.0, 2085000.0, 1309100.0, 1068029.0, 1665000.0, 1533873.0, 2862929.0, 1926454.0]},
+                {"name": "Tic", "data": [1393000.0, 1856000.0, 1433000.0, 2188000.0, 2137000.0, 1900700.0, 1593141.0, 1369000.0, 3112619.0, 7638251.0, 2077805.0]}
+            ]
+        });
+
+        // Gráfico 4: Top 5 Áreas
+        Highcharts.chart('container-top5', {
+            credits: { enabled: false },
+            chart: { type: 'bar' },
+            title: { text: 'Evolución de las 5 Áreas Principales' },
+            subtitle: { text: 'Proyectos adjudicados por año' },
+            xAxis: {
+                categories: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017],
+                title: { text: null },
+                gridLineWidth: 1,
+                lineWidth: 0
+            },
+            yAxis: {
+                min: 0,
+                title: { text: 'Cantidad de Proyectos', align: 'high' },
+                labels: { overflow: 'justify' },
+                gridLineWidth: 0
+            },
+            tooltip: { valueSuffix: ' proyectos' },
+            plotOptions: {
+                bar: {
+                    borderRadius: '50%',
+                    dataLabels: { enabled: true },
+                    groupPadding: 0.1
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: 'var(--highcharts-background-color, #ffffff)',
+                shadow: true
+            },
+            series: [
+                {"name": "Agropecuaria", "data": [10, 12, 15, 19, 17, 15, 10, 8, 10, 19, 5, 15, 19, 20, 15, 6, 9]},
+                {"name": "Otros", "data": [7, 4, 9, 8, 7, 6, 6, 14, 13, 15, 4, 0, 0, 0, 0, 0, 0]},
+                {"name": "Pesca Y Acuicultura", "data": [7, 10, 10, 7, 5, 2, 5, 4, 6, 6, 1, 3, 3, 13, 19, 18, 10]},
+                {"name": "Salud", "data": [3, 5, 4, 3, 9, 5, 4, 6, 5, 9, 6, 13, 7, 2, 10, 20, 6]},
+                {"name": "Tic", "data": [8, 9, 7, 12, 11, 9, 7, 5, 11, 26, 7, 0, 0, 0, 0, 0, 0]}
+            ]
+        });
+    </script>
+</body>
+</html>
